@@ -500,7 +500,7 @@
             
             let arquivo = document.querySelector('[name=arquivo0]').files[0];
 
-            const uploadTask0= storage.ref('logo/' + arquivo).put(arquivo);
+            const uploadTask0= storage.ref('baner/' + arquivo).put(arquivo);
 
             uploadTask0.on('state_changed', (snapshot) => {
                 const progress0 = (snapshot.bytesTransferred / snapshot.totalBytes) * 1;
@@ -510,8 +510,8 @@
 
                 },
                 function () {
-                    storage.ref('logo/' + arquivo).getDownloadURL().then((url) => {
-                        db.collection('logo').add({
+                    storage.ref('baner/' + arquivo).getDownloadURL().then((url) => {
+                        db.collection('baner').add({
                             
                             arquivoURL: url
                         })
