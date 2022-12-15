@@ -458,16 +458,7 @@
          
 
 /***********************************************************************************/
-
-
-
-         /***********************************************************************************/
-
-
-
-
-
-        const formCliente1 = document.querySelector('#form-cliente1');
+         const formCliente1 = document.querySelector('#form-cliente1');
         formCliente1.addEventListener('submit', (e) => {
             e.preventDefault();
             let comprovanteText = document.querySelector('[name=comprovante1]').value;
@@ -486,6 +477,42 @@
                     storage.ref('curso1/' + arquivo.name).getDownloadURL().then((url) => {
                         db.collection('curso1').add({
                             descricao: comprovanteText,
+                            arquivoURL: url
+                        })
+                        alert("Cadastro Enviado com sucesso!");
+                    })
+                }
+            )
+        })
+
+
+
+
+         /***********************************************************************************/
+
+
+
+
+
+        const formCliente0 = document.querySelector('#form-cliente0');
+        formCliente0.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            let arquivo = document.querySelector('[name=arquivo0]').files[0];
+
+            const uploadTask0= storage.ref('baner/' + arquivo).put(arquivo);
+
+            uploadTask0.on('state_changed', (snapshot) => {
+                const progress0 = (snapshot.bytesTransferred / snapshot.totalBytes) * 1;
+                console.log(progress0);
+            },
+                function (error) {
+
+                },
+                function () {
+                    storage.ref('baner/' + arquivo).getDownloadURL().then((url) => {
+                        db.collection('baner').add({
+                            
                             arquivoURL: url
                         })
                         alert("Cadastro Enviado com sucesso!");
