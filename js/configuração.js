@@ -455,6 +455,37 @@
         })
 
 
+         const formCliente0 = document.querySelector('#form-cliente0');
+        formCliente0.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let arquivo = document.querySelector('[name=arquivo0]').files[0];
+
+            const uploadTask0 = storage.ref('baner/' + arquivo).put(arquivo);
+
+            uploadTask0.on('state_changed', (snapshot) => {
+                const progress0 = (snapshot.bytesTransferred / snapshot.totalBytes) * 1;
+                console.log(progress0);
+            },
+                function (error) {
+
+                },
+                function () {
+                    storage.ref('baner/' + arquivo).getDownloadURL().then((url) => {
+                        db.collection('baner').add({
+                          
+                            arquivoURL: url
+                        })
+                        alert("Cadastro Enviado com sucesso!");
+                    })
+                }
+            )
+        })
+
+
+/***********************************************************************************/
+
+
+
          /***********************************************************************************/
 
 
